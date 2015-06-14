@@ -1,11 +1,13 @@
-<p>
-  <b>Title：<%= @post.title %></b>
-</p>
 
-<p>
-  <b>Body：<%= @post.body %></b>
-</p>
-
-<p>
-  <b>Category：<%= @post.category %></b>
-</p>
+<div class="col-lg-12">
+  <h1><%= @post.title %></h1>
+  <p>カテゴリ：<%= @post.category %></p>
+  <p>投稿日：<%= @post.updated_at %></p>
+  <hr>
+  <p></p>
+  <p><%= simple_format(@post.body) %></p>
+  <p></p>
+  <hr>
+  <%= link_to '編集する', edit_post_path(@post.id), class: "btn btn-default" %>
+  <%= link_to '削除する', post_path(@post.id), method: :delete, class: "btn btn-danger" %>
+</div>

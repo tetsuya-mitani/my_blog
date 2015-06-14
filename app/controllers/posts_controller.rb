@@ -1,7 +1,9 @@
 class PostsController < ApplicationController
-  def initialize
-    @author = Author.find(1)
-  end
+  # before_action :set_post, only: [:show, :edit, :update, :destroy]
+
+  # def initialize
+  #   @author = Author.find(1)
+  # end
 
   def show
     @post = Post.find(params[:id])
@@ -9,6 +11,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
+    @author = Author.find(1)
   end
 
   def new
@@ -37,6 +40,15 @@ class PostsController < ApplicationController
     redirect_to "/posts/#{@post.id}"
   end
 
+  def destroy
+    # formから投げられたデータを受け取る
+    @post = Post.find(params[:id])
+    @post.delete
+
+    # show.html.erbに飛ばす
+    redirect_to "/posts"
+  end
+
   private
   def post_params
     # params.require(:key).permit(:filter)
@@ -46,5 +58,9 @@ class PostsController < ApplicationController
       :category,
     )
   end
+
+  def set_post
+   @post = Post.find(params[:id])
+ end
 
 end
