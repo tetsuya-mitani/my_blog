@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   # before_action :set_post, only: [:show, :edit, :update, :destroy]
 
+  # initializeのような処理はbefore_actionで行う。
+
   # def initialize
   #   @author = Author.find(1)
   # end
@@ -55,7 +57,7 @@ class PostsController < ApplicationController
     params.require(:post).permit(
       :title,
       :body,
-      :category,
+      :category_id,
     )
   end
 
