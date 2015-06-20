@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+
   # before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # initializeのような処理はbefore_actionで行う。
@@ -12,7 +13,8 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    @q = Post.ransack(params[:q])
+    @posts = @q.result.page(params[:page])
     @author = Author.find(1)
   end
 
