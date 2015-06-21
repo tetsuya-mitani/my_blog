@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-
+  before_action :authenticate_writer!, only: [:edit, :destroy, :update]
   # before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # initializeのような処理はbefore_actionで行う。
@@ -16,6 +16,7 @@ class PostsController < ApplicationController
     @q = Post.ransack(params[:q])
     @posts = @q.result.page(params[:page])
     @author = Author.find(1)
+    @writer = Writer.find(1)
   end
 
   def new
